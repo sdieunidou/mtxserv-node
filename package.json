@@ -18,5 +18,8 @@
   "homepage": "https://github.com/leafgard/mtxserv-node#readme",
   "devDependencies": {
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "sync-request": "^6.0.0"
   }
 }

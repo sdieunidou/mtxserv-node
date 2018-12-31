@@ -4,10 +4,10 @@
  * @author Yann SEGET <dev@leafgard.fr>
  */
 
-module.exports = class Viewer {
+module.exports = class Admin {
 
   /**
-   * Builds the Viewer API module
+   * Builds the Admin API module
    * @param {string} accessToken Generated access token
    * @param {string} baseUrl API base URL
    * @param {object} request sync-request Object
@@ -17,50 +17,54 @@ module.exports = class Viewer {
     this.baseUrl = baseUrl
     this.req = request
   }
-  
+
   /**
-   * Returns data about specified game server
-   * @param {string} type Server's type (example: 'minecraft')
-   * @param {string} ip Server's IP
-   * @param {number} port Server's PORT
-   * @returns {object} Server's data
+   * Get server's administrators list
+   * @param {number} id Server's ID
+   * @method GET
+   * @returns {object} Server's administrators list
    */
-  getGameServerData(type, ip, port)  {
+  getAdminList(id)  {
     return this.exec({
       method: 'GET',
-      uri: `/viewers/game?type=${type}&ip=${ip}&port=${port}`,
-      paramAtEnd: true,
+      uri: `/admins/${id}`,
+      paramAtEnd: false,
       params: {}
     })
   }
 
   /**
-   * Returns data about specified Mumble server
-   * @param {string} ip Server's IP
-   * @param {number} port Server's PORT
-   * @returns {object} Server's data
+   * Adds an administrator to server
+   * @param {number} id Server's ID
+   * @param {string} email New administrator's email
+   * @param {array} grants List of his grants
+   * @method POST
+   * @returns {object} Datas about what happened
    */
-  getMumbleServerData(ip, port)  {
+  addAdmin(id, email, grants = []) {
     return this.exec({
-      method: 'GET',
-      uri: `/viewers/mumble?ip=${ip}&port=${port}`,
-      paramAtEnd: true,
-      params: {}
+      method: 'POST',
+      uri: `/admins/${id}`,
+      paramAtEnd: false,
+      params: {
+        user: email,
+        roles: grants
+      }
     })
   }
 
   /**
-   * Returns data about specified Teamspeak server
-   * @param {string} ip Server's IP
-   * @param {number} port Server's PORT
-   * @returns {object} Server's data
-   * @todo TEST WITH REAL TEAMSPEAK SERVER
+   * Removes administrator from server
+   * @param {number} id Server's ID
+   * @param {number} userId Admin's ID
+   * @method DELETE
+   * @returns {?}
    */
-  getTeamspeakServerData(ip, port)  {
+  removeAdmin(id, userId) {
     return this.exec({
-      method: 'GET',
-      uri: `/viewers/teamspeak?ip=${ip}&port=${port}`,
-      paramAtEnd: true,
+      method: 'DELETE',
+      uri: `/admins/${id}/${userId}`,
+      paramAtEnd: false,
       params: {}
     })
   }

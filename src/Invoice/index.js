@@ -27,7 +27,8 @@ module.exports = class Invoice {
     return this.exec({
       method: 'GET',
       uri: `/invoices`,
-      paramAtEnd: false
+      paramAtEnd: false,
+      params: {}
     })
   }
   
@@ -41,7 +42,8 @@ module.exports = class Invoice {
     return this.exec({
       method: 'GET',
       uri: `/invoices/${id}`,
-      paramAtEnd: false
+      paramAtEnd: false,
+      params: {}
     })
   }
   
@@ -55,7 +57,8 @@ module.exports = class Invoice {
     return this.exec({
       method: 'GET',
       uri: `/invoices/${id}/logs`,
-      paramAtEnd: false
+      paramAtEnd: false,
+      params: {}
     })
   }
   
@@ -70,7 +73,8 @@ module.exports = class Invoice {
     return this.exec({
       method: 'PUT',
       uri: `/invoices/${id}/offers`,
-      paramAtEnd: false
+      paramAtEnd: false,
+      params: {}
     })
   }
   
@@ -84,7 +88,8 @@ module.exports = class Invoice {
     return this.exec({
       method: 'GET',
       uri: `/invoices/${id}/offers/game`,
-      paramAtEnd: false
+      paramAtEnd: false,
+      params: {}
     })
   }
   
@@ -98,7 +103,8 @@ module.exports = class Invoice {
     return this.exec({
       method: 'GET',
       uri: `/invoices/${id}/offers/next-allowed`,
-      paramAtEnd: false
+      paramAtEnd: false,
+      params: {}
     })
   }
 
@@ -110,9 +116,15 @@ module.exports = class Invoice {
   exec(params) {
     let uri =  params.paramAtEnd ? params.uri.substr(1) + '&' : params.uri.substr(1) + '?'
     let method = params.method
-    return JSON.parse(this.req(method,
-      `${this.baseUrl}${uri}access_token=${this.accessToken}`
-    ).getBody('utf8'))
+    if (method == 'POST' || method == 'PUT') {
+      return JSON.parse(this.req(method, `${this.baseUrl}${uri}`, {
+        json: params.params
+      }).getBody('utf8'))
+    } else {
+      return JSON.parse(this.req(method,
+        `${this.baseUrl}${uri}access_token=${this.accessToken}`
+      ).getBody('utf8'))
+    }
   }
 
 }

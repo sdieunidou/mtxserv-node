@@ -28,7 +28,8 @@ module.exports = class Password {
     return this.exec({
       method: 'GET',
       uri: `/password/random?length=${length}`,
-      paramAtEnd: true
+      paramAtEnd: true,
+      params: {}
     })
   }
 
@@ -40,9 +41,15 @@ module.exports = class Password {
   exec(params) {
     let uri =  params.paramAtEnd ? params.uri.substr(1) + '&' : params.uri.substr(1) + '?'
     let method = params.method
-    return JSON.parse(this.req(method,
-      `${this.baseUrl}${uri}access_token=${this.accessToken}`
-    ).getBody('utf8'))
+    if (method == 'POST' || method == 'PUT') {
+      return JSON.parse(this.req(method, `${this.baseUrl}${uri}`, {
+        json: params.params
+      }).getBody('utf8'))
+    } else {
+      return JSON.parse(this.req(method,
+        `${this.baseUrl}${uri}access_token=${this.accessToken}`
+      ).getBody('utf8'))
+    }
   }
 
 }

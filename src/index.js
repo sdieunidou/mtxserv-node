@@ -17,6 +17,7 @@ module.exports = class mTxServClient {
     this.expiresIn = parsed.expires_in
     this.refreshToken = parsed.refresh_token
     this.Invoice = new ( require('./Invoice') )(this.accessToken, defaultConfig.baseUrl, request)
+    this.Password = new ( require('./Password') )(this.accessToken, defaultConfig.baseUrl, request)
   }
 
   static initialize(userConfig) {

@@ -10,7 +10,7 @@ const mTxServClient = require('../src/')
 let Client = mTxServClient.initialize({
   clientId: 'YOUR-CLIENT-ID',
   clientSecret: 'YOUR-CLIENT-SECRET',
-  apiToken: 'YOUR-API-TOKEN'
+  apiToken: 'YOUR-API-KEY'
 })
 
 test('Calling /invoices in GET returns JSON', () => {

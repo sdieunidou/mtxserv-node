@@ -24,7 +24,7 @@ test('Calling new mTxServClient() with good arguments returns Client instance wi
   let Client = mTxServClient.initialize({
     clientId: 'YOUR-CLIENT-ID',
     clientSecret: 'YOUR-CLIENT-SECRET',
-    apiToken: 'YOUR-API-TOKEN'
+    apiToken: 'YOUR-API-KEY'
   })
   expect(Client).toBeInstanceOf(mTxServClient)
   expect(Client.accessToken).toBeDefined()

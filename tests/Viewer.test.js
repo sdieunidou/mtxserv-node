@@ -17,9 +17,9 @@ let Client = mTxServClient.initialize({
 })
 
 test('Calling /viewers/game with params in GET returns object', () => {
-  expect(typeof Client.Viewer.getGameServerData('minecraft', 'game-fr-23.mtxserv.com', 27420)).toBe('object')
+  expect(typeof Client.Viewer.getGameServerData(process.env.SERVER_TYPE, process.env.SERVER_IP, process.env.SERVER_PORT)).toBe('object')
 })
 
 test('Calling /viewers/mumble with params in GET returns object', () => {
-  expect(typeof Client.Viewer.getMumbleServerData('mumble1.mtxserv.fr', 51562)).toBe('object')
+  expect(typeof Client.Viewer.getMumbleServerData(process.env.MUMBLE_IP, process.env.MUMBLE_PORT)).toBe('object')
 })

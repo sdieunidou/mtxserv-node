@@ -21,17 +21,17 @@ test('Calling /invoices in GET returns JSON', () => {
 })
 
 test('Calling /invoices/{id} in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoice(153087)).toBe('object')
+  expect(typeof Client.Invoice.getInvoice(process.env.SERVER_ID)).toBe('object')
 })
 
 test('Calling /invoices/{id}/logs in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoiceLogs(153087)).toBe('object')
+  expect(typeof Client.Invoice.getInvoiceLogs(process.env.SERVER_ID)).toBe('object')
 })
 
 test('Calling /invoices/{id}/offers/game in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoiceOffersList(153087)).toBe('object')
+  expect(typeof Client.Invoice.getInvoiceOffersList(process.env.SERVER_ID)).toBe('object')
 })
 
 test('Calling /invoices/{id}/offers/next-allowed in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoiceNextOfferDate(153087)).toBe('object')
+  expect(typeof Client.Invoice.getInvoiceNextOfferDate(process.env.SERVER_ID)).toBe('object')
 })

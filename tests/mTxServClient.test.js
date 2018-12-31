@@ -6,6 +6,8 @@
  * JEST TEST
  */
 
+require('dotenv').config()
+
 const mTxServClient = require('../src/')
 
 test('Calling new mTxServClient() without arguments throws error', () => {
@@ -22,9 +24,9 @@ test('Calling new mTxServClient() with wrong arguments throws error', () => {
 
 test('Calling new mTxServClient() with good arguments returns Client instance with defined credentials', () => {
   let Client = mTxServClient.initialize({
-    clientId: 'YOUR-CLIENT-ID',
-    clientSecret: 'YOUR-CLIENT-SECRET',
-    apiToken: 'YOUR-API-KEY'
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    apiToken: process.env.API_KEY
   })
   expect(Client).toBeInstanceOf(mTxServClient)
   expect(Client.accessToken).toBeDefined()

@@ -16,6 +16,10 @@ let Client = mTxServClient.initialize({
   apiToken: process.env.API_KEY
 })
 
-test('Calling /password/random in GET returns string', () => {
-  expect(typeof Client.Password.generateRandomPassword()).toBe('string')
+test('Calling /viewers/game with params in GET returns object', () => {
+  expect(typeof Client.Viewer.getGameServerData('minecraft', 'game-fr-23.mtxserv.com', 27420)).toBe('object')
+})
+
+test('Calling /viewers/mumble with params in GET returns object', () => {
+  expect(typeof Client.Viewer.getMumbleServerData('mumble1.mtxserv.fr', 51562)).toBe('object')
 })

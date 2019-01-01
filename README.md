@@ -64,50 +64,50 @@ Basically, methods are called like this:
 something = client.Class.{subClass.}Method(params)
 ```
 
-You will have to follow this architecture:
+#### To-Do (Checked only when completly working)
 
-- **Admin**
-- **Game**
-  - ARK
-  - ARKWorkshop
-  - Actions
-  - Arma3
-  - Backup
-  - Bukkit
-  - CSGO
-  - Cod4
-  - FTP
-  - Files
-  - GmodBackdoor
-  - HTLV
-  - History
-  - Infos
-  - Maps
-  - MineBackup
-  - MineBan
-  - MineConfig
-  - MineOperators
-  - MineVersion
-  - MineWhiteList
-  - Minecraft
-  - MineLive
-  - Plugins
-  - RestoreExpired
-  - SRCDS
-  - SRCDSPlugins
-  - SRCDSWorkshop
-  - STEAMStats
-  - Tasks
-  - eBOT
-- **Hosting**
-  - Domain
-- **Invoice**
-- **Password**
-- **Viewer**
-- **Voice**
-  - Actions
-  - Mumble
-  - Teamspeak
+- [ ] **Admin**
+- [ ] **Game**
+  - [ ] ARK
+  - [ ] ARKWorkshop
+  - [ ] Actions
+  - [ ] Arma3
+  - [ ] Backup
+  - [ ] Bukkit
+  - [ ] CSGO
+  - [ ] Cod4
+  - [ ] FTP
+  - [ ] Files
+  - [ ] GmodBackdoor
+  - [ ] HTLV
+  - [ ] History
+  - [ ] Infos
+  - [ ] Maps
+  - [ ] MineBackup
+  - [ ] MineBan
+  - [ ] MineConfig
+  - [ ] MineOperators
+  - [ ] MineVersion
+  - [ ] MineWhiteList
+  - [ ] Minecraft
+  - [ ] MineLive
+  - [ ] Plugins
+  - [ ] RestoreExpired
+  - [ ] SRCDS
+  - [ ] SRCDSPlugins
+  - [ ] SRCDSWorkshop
+  - [ ] STEAMStats
+  - [ ] Tasks
+  - [ ] eBOT
+- [ ] **Hosting**
+  - [ ] Domain
+- [ ] **Invoice**
+- [x] **Password**
+- [ ] **Viewer**
+- [ ] **Voice**
+  - [ ] Actions
+  - [ ] Mumble
+  - [ ] Teamspeak
 
 ## Testing
 
@@ -122,6 +122,31 @@ $ npm test
 ```
 
 ## Notes
+
+**Admin**
+- `addAdmin(sId)` - encounters **400 BAD REQUEST** in **POST METHOD** with the following layout:
+
+*POST* https://mtxserv.com/api/v1/admins/SERVER_ID?access_token=ACCESS_TOKEN
+
+*param (required): user*: john@doe.com
+
+*param (optional): roles[]*: []
+
+- `removeAdmin(sId)` - encounters **404 NOT FOUND** in **DELETE METHOD** with the following layout:
+
+*DELETE* https://mtxserv.com/api/v1/admins/SERVER_ID/USER_ID?access_token=ACCESS_TOKEN
+
+
+
+**Invoice**
+- `changeInvoiceSlots(sId, slots)` - Not enough documented, couldn't test it according to actual offers
+- *POST* `/invoices/${id}/offers/game` - Wrong documented, don't know what it is for
+
+
+
+**Viewer**
+- `getTeamspeakServerData(sId)` - Couldn't test it because I don't have a Teamspeak server
+
 
 
 

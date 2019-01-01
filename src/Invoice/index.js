@@ -66,23 +66,24 @@ module.exports = class Invoice {
    * Should change invoice's slots
    * @param {number} id Invoice's ID
    * @method POST
-   * @todo CANNOT TEST
-   * @return {?}
+   * @see README#Notes
    */
-  changeInvoiceSlots(id) {
+  changeInvoiceSlots(id, slots) {
     return this.exec({
       method: 'PUT',
       uri: `/invoices/${id}/offers`,
       paramAtEnd: false,
-      params: {}
+      params: {
+        slots: slots
+      }
     })
   }
   
   /**
    * Returns invoice's offers list
    * @param {number} id Invoice's ID
-   * @todo CHECK FOR POST METHOD AS WELL
    * @method GET
+   * @returns Invoice's offers list
    */
   getInvoiceOffersList(id) {
     return this.exec({

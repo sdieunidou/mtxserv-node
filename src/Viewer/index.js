@@ -53,8 +53,7 @@ module.exports = class Viewer {
    * Returns data about specified Teamspeak server
    * @param {string} ip Server's IP
    * @param {number} port Server's PORT
-   * @returns {object} Server's data
-   * @todo TEST WITH REAL TEAMSPEAK SERVER
+   * @see README#Notes
    */
   getTeamspeakServerData(ip, port)  {
     return this.exec({

@@ -39,7 +39,7 @@ module.exports = class Admin {
    * @param {string} email New administrator's email
    * @param {array} grants List of his grants
    * @method POST
-   * @returns {object} Datas about what happened
+   * @see README#Notes
    */
   addAdmin(id, email, grants = []) {
     return this.exec({
@@ -58,7 +58,7 @@ module.exports = class Admin {
    * @param {number} id Server's ID
    * @param {number} userId Admin's ID
    * @method DELETE
-   * @returns {?}
+   * @see README#Notes
    */
   removeAdmin(id, userId) {
     return this.exec({
@@ -77,6 +77,7 @@ module.exports = class Admin {
   exec(params) {
     let uri =  params.paramAtEnd ? params.uri.substr(1) + '&' : params.uri.substr(1) + '?'
     let method = params.method
+    console.log(`${this.baseUrl}${uri}`)
     if (method == 'POST' || method == 'PUT') {
       return JSON.parse(this.req(method, `${this.baseUrl}${uri}`, {
         json: params.params

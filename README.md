@@ -124,7 +124,7 @@ $ npm test
 ## Notes
 
 **Admin**
-- `addAdmin(sId)` - encounters **400 BAD REQUEST** in **POST METHOD** with the following layout:
+- `addAdmin(sId)` - encounters **400 BAD REQUEST** using **POST METHOD** with the following layout:
 
 *POST* https://mtxserv.com/api/v1/admins/SERVER_ID?access_token=ACCESS_TOKEN
 
@@ -132,20 +132,20 @@ $ npm test
 
 *param (optional): roles[]*: []
 
-- `removeAdmin(sId)` - encounters **404 NOT FOUND** in **DELETE METHOD** with the following layout:
+- `removeAdmin(sId)` - encounters **404 NOT FOUND** using **DELETE METHOD** with the following layout:
 
 *DELETE* https://mtxserv.com/api/v1/admins/SERVER_ID/USER_ID?access_token=ACCESS_TOKEN
 
 
 
 **Invoice**
-- `changeInvoiceSlots(sId, slots)` - Not enough documented, couldn't test it according to actual offers
-- *POST* `/invoices/${id}/offers/game` - Wrong documented, don't know what it is for
+- `changeInvoiceSlots(sId, slots)` - **Not enough documented**, couldn't test it according to actual offers
+- *POST* `/invoices/${id}/offers/game` - **Documentation is wrong**, don't know what it is for
 
 
 
 **Viewer**
-- `getTeamspeakServerData(sId)` - Couldn't test it because I don't have a Teamspeak server
+- `getTeamspeakServerData(sId)` - Couldn't test it because **I don't have a Teamspeak server**
 
 
 
@@ -165,7 +165,7 @@ $ npm test
 
 * [dotenv](https://www.npmjs.com/package/dotenv)^6.2.0 - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
 * [jest](https://www.npmjs.com/package/jest)^23.6.0 - Delightful JavaScript Testing
-$ [sync-request](https://www.npmjs.com/package/sync-request)^6.0.0 - Make synchronous web requests with cross platform support.
+* [sync-request](https://www.npmjs.com/package/sync-request)^6.0.0 - Make synchronous web requests with cross platform support.
 
 ## Members
 

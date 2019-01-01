@@ -20,6 +20,7 @@ module.exports = class mTxServClient {
     this.Password = new ( require('./Password') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
     this.Viewer = new ( require('./Viewer') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
     this.Admin = new ( require('./Admin') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
+    this.Game = new ( require('./Game') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
   }
 
   /**
@@ -63,7 +64,7 @@ module.exports = class mTxServClient {
     let uri =  params.paramAtEnd ? params.uri.substr(1) + '&' : params.uri.substr(1) + '?'
     let method = params.method
     if (method == 'POST' || method == 'PUT') {
-      return JSON.parse(this.req(method, `${this.baseUrl}${uri}`, {
+      return JSON.parse(this.req(method, `${this.baseUrl}${uri}access_token=${this.accessToken}`, {
         json: params.params
       }).getBody('utf8'))
     } else {

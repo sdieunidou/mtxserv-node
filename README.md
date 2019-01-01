@@ -125,30 +125,31 @@ $ npm test
 
 **Admin**
 - `addAdmin(sId)` - encounters **400 BAD REQUEST** using **POST METHOD** with the following layout:
-
-*POST* https://mtxserv.com/api/v1/admins/SERVER_ID?access_token=ACCESS_TOKEN
-
-*param (required): user*: john@doe.com
-
-*param (optional): roles[]*: []
-
+  - *POST* https://mtxserv.com/api/v1/admins/SERVER_ID?access_token=ACCESS_TOKEN
+  - *param (required): user*: john@doe.com
+  - *param (optional): roles[]*: []
 - `removeAdmin(sId)` - encounters **404 NOT FOUND** using **DELETE METHOD** with the following layout:
-
-*DELETE* https://mtxserv.com/api/v1/admins/SERVER_ID/USER_ID?access_token=ACCESS_TOKEN
-
-
+  - *DELETE* https://mtxserv.com/api/v1/admins/SERVER_ID/USER_ID?access_token=ACCESS_TOKEN
 
 **Invoice**
 - `changeInvoiceSlots(sId, slots)` - **Not enough documented**, couldn't test it according to actual offers
-- *POST* `/invoices/${id}/offers/game` - **Documentation is wrong**, don't know what it is for
-
-
+- *POST* `/invoices/${sId}/offers/game` - **Documentation is wrong**, don't know what it is for
 
 **Viewer**
 - `getTeamspeakServerData(sId)` - Couldn't test it because **I don't have a Teamspeak server**
 
-
-
+**Game**
+- `sendCommand(sId, cmd)` - encounters **404 NOT FOUND** using **POST METHOD** with the following layout:
+  - *POST* https://mtxserv.com/api/v1/game/153087/command?access_token=ACCESS_TOKEN
+  - *param (required): command*: /help
+- *PUT* `/game/${sId}/games` - Couldn't test it because `getGameList(sId)` **doesn't work**.
+- `getGameList(sId)` - encounters **404 NOT FOUND** using **GET METHOD** with the following layout:
+  - *GET* https://mtxserv.com/api/v1/game/SERVER_ID/games?access_token=ACCESS_TOKEN
+- *PUT* `/game/${sId}/slots` - Couldn't test it because I don't know what are the **slots possibilities**.
+- `getGameServersList(id)` - encounters **403 FORBIDDEN** using **GET METHOD** with the following layout:
+  - *GET* https://mtxserv.com/api/v1/game/CLIENT_ID/servers?access_token=ACCESS_TOKEN
+- `getGameServerById(id, sId)` - encounters **403 FORBIDDEN** using **GET METHOD** with the following layout:
+  - *GET* https://mtxserv.com/api/v1/game/CLIENT_ID/servers/SERVER_ID?access_token=ACCESS_TOKEN 
 
 ## Contribution
 

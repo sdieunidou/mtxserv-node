@@ -26,7 +26,7 @@ test('Calling /admins/{id} in GET returns array', () => {
 /**
  * Admin.addAdmin()
  */
-test('Calling /admins/${iId} in POST with params returns array', () => {
+test('Calling /admins/${iId} in POST with params returns object', () => {
   expect(typeof Client.Admin.addAdmin(process.env.SERVER_INVOICE_ID, process.env.NEWADMIN_EMAIL)).toBe('string')
 })
 

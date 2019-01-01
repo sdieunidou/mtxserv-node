@@ -111,6 +111,8 @@ something = client.Class.{subClass.}Method(params)
 
 ## Testing
 
+<p align="center"><img src="docs/tests.png" alt="mtxserv-node-tests"></p>
+
 Tests (using JEST) are avaiable in `./tests`.
 
 We are using **dotenv** to pass parameters to each test, please create a `.env` at root directory or modify the tests.

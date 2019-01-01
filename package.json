@@ -1,0 +1,26 @@
+{
+  "name": "mtxserv-node",
+  "version": "0.1.0",
+  "description": "Node.JS SDK providing easy access to mTxServ's API",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leafgard/mtxserv-node.git"
+  },
+  "author": "Yann SEGET <dev@leafgard.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leafgard/mtxserv-node/issues"
+  },
+  "homepage": "https://github.com/leafgard/mtxserv-node#readme",
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "sync-request": "^6.0.0"
+  }
+}

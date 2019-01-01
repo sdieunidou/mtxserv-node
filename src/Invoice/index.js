@@ -35,14 +35,14 @@ module.exports = class Invoice {
   
   /**
    * Returns user's invoice details
-   * @param {number} id Invoice's ID
+   * @param {number} iId Invoice's ID
    * @method GET
    * @returns {object} Invoice's details
    */
-  getInvoice(id) {
+  getInvoice(iId) {
     return this.exec({
       method: 'GET',
-      uri: `/invoices/${id}`,
+      uri: `/invoices/${iId}`,
       paramAtEnd: false,
       params: {}
     })
@@ -50,14 +50,14 @@ module.exports = class Invoice {
   
   /**
    * Returns invoice's logs
-   * @param {number} id Invoice's ID
+   * @param {number} iId Invoice's ID
    * @method GET
    * @returns {object} Invoice's logs
    */
-  getInvoiceLogs(id) {
+  getInvoiceLogs(iId) {
     return this.exec({
       method: 'GET',
-      uri: `/invoices/${id}/logs`,
+      uri: `/invoices/${iId}/logs`,
       paramAtEnd: false,
       params: {}
     })
@@ -65,14 +65,15 @@ module.exports = class Invoice {
   
   /**
    * Should change invoice's slots
-   * @param {number} id Invoice's ID
+   * @param {number} iId Invoice's ID
+   * @param {number} slots New invoice's slots number
    * @method POST
    * @see README#Notes
    */
-  changeInvoiceSlots(id, slots) {
+  changeInvoiceSlots(iId, slots) {
     return this.exec({
       method: 'PUT',
-      uri: `/invoices/${id}/offers`,
+      uri: `/invoices/${iId}/offers`,
       paramAtEnd: false,
       params: {
         slots: slots
@@ -82,14 +83,14 @@ module.exports = class Invoice {
   
   /**
    * Returns invoice's offers list
-   * @param {number} id Invoice's ID
+   * @param {number} iId Invoice's ID
    * @method GET
    * @returns Invoice's offers list
    */
-  getInvoiceOffersList(id) {
+  getInvoiceOffersList(iId) {
     return this.exec({
       method: 'GET',
-      uri: `/invoices/${id}/offers/game`,
+      uri: `/invoices/${iId}/offers/game`,
       paramAtEnd: false,
       params: {}
     })
@@ -97,14 +98,14 @@ module.exports = class Invoice {
   
   /**
    * Returns next date for changing offer
-   * @param {number} id Invoice's ID
+   * @param {number} iId Invoice's ID
    * @method GET
    * @return {object} State and date for changing offer
    */
-  getInvoiceNextOfferDate(id) {
+  getInvoiceNextOfferDate(iId) {
     return this.exec({
       method: 'GET',
-      uri: `/invoices/${id}/offers/next-allowed`,
+      uri: `/invoices/${iId}/offers/next-allowed`,
       paramAtEnd: false,
       params: {}
     })

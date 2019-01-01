@@ -140,7 +140,7 @@ $ npm test
 
 **Game**
 - `sendCommand(sId, cmd)` - encounters **404 NOT FOUND** using **POST METHOD** with the following layout:
-  - *POST* https://mtxserv.com/api/v1/game/153087/command?access_token=ACCESS_TOKEN
+  - *POST* https://mtxserv.com/api/v1/game/SERVER_ID/command?access_token=ACCESS_TOKEN
   - *param (required): command*: /help
 - *PUT* `/game/${sId}/games` - Couldn't test it because `getGameList(sId)` **doesn't work**.
 - `getGameList(sId)` - encounters **404 NOT FOUND** using **GET METHOD** with the following layout:

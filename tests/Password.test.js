@@ -16,6 +16,16 @@ let Client = mTxServClient.initialize({
   apiToken: process.env.API_KEY
 })
 
+/**
+ * Password.generateRandomPassword()
+ */
 test('Calling /password/random in GET returns string', () => {
   expect(typeof Client.Password.generateRandomPassword()).toBe('string')
+})
+
+/**
+ * Password.generateRandomPassword()
+ */
+test('Calling /password/random in GET with params returns string', () => {
+  expect(typeof Client.Password.generateRandomPassword(10)).toBe('string')
 })

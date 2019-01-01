@@ -20,60 +20,62 @@ module.exports = class Game {
   }
 
   /**
-   * Send a command to specified server
-   * @param {number} id Server's ID
+   * Send a command to specified gameserver
+   * @param {number} gsId GameServer's ID
    * @param {string} cmd Command to send
-   * @see README#Notes
+   * @method POST
+   * @returns {string} Empty string
    */
-  sendCommand(id, cmd)  {
+  sendCommand(gsId, cmd)  {
     return this.exec({
       method: 'POST',
-      uri: `/game/${id}/command`,
+      uri: `/game/${gsId}/command`,
       paramAtEnd: false,
-      params: {
-        command: cmd
-      }
+      params: {command: `${cmd}`}
     })
   }
 
   /**
    * Returns a list of available games for this server
-   * @param {number} id Server's ID
-   * @see README#Notes
+   * @param {number} gsId Server's ID
+   * @method GET
+   * @returns {array} List of available games
    */
-  getGameList(id)  {
+  getGameList(gsId)  {
     return this.exec({
       method: 'GET',
-      uri: `/game/${id}/games`,
+      uri: `/game/${gsId}/games`,
       paramAtEnd: false,
       params: {}
     })
   }
 
   /**
-   * Gets a list of this client servers
-   * @param {number} id Client's ID
-   * @see README#Notes
+   * Gets a list of this invoice servers
+   * @param {number} iId Invoice's ID
+   * @method GET
+   * @returns {array} List of this invoice servers
    */
-  getGameServersList(id) {
+  getGameServersList(iId) {
     return this.exec({
       method: 'GET',
-      uri: `/game/${id}/servers`,
+      uri: `/game/${iId}/servers`,
       paramAtEnd: false,
       params: {}
     })
   }
 
   /**
-   * Gets data about specified server from specified client
-   * @param {string} cId Client's ID
-   * @param {number} id Server's ID
-   * @see README#Notes
+   * Gets data about specified server from specified invoice
+   * @param {number} iId Invoice's ID
+   * @param {string} gsId GameServer's ID
+   * @method GET
+   * @returns {object} Data about the 
    */
-  getGameServerById(cId, id) {
+  getGameServerById(iId, gsId) {
     return this.exec({
       method: 'GET',
-      uri: `/game/${id}/servers/${cId}`,
+      uri: `/game/${iId}/servers/${gsId}`,
       paramAtEnd: false,
       params: {}
     })

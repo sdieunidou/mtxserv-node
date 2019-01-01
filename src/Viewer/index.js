@@ -24,6 +24,7 @@ module.exports = class Viewer {
    * @param {string} type Server's type (example: 'minecraft')
    * @param {string} ip Server's IP
    * @param {number} port Server's PORT
+   * @method GET
    * @returns {object} Server's data
    */
   getGameServerData(type, ip, port)  {
@@ -39,6 +40,7 @@ module.exports = class Viewer {
    * Returns data about specified Mumble server
    * @param {string} ip Server's IP
    * @param {number} port Server's PORT
+   * @method GET
    * @returns {object} Server's data
    */
   getMumbleServerData(ip, port)  {
@@ -54,6 +56,7 @@ module.exports = class Viewer {
    * Returns data about specified Teamspeak server
    * @param {string} ip Server's IP
    * @param {number} port Server's PORT
+   * @method GET
    * @see README#Notes
    */
   getTeamspeakServerData(ip, port)  {

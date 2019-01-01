@@ -66,7 +66,7 @@ something = client.Class.{subClass.}Method(params)
 
 #### To-Do (Checked only when completly working)
 
-- [ ] **Admin**
+- [x] **Admin**
 - [ ] **Game**
   - [ ] ARK
   - [ ] ARKWorkshop
@@ -122,34 +122,27 @@ $ npm test
 ```
 
 ## Notes
+### Notations
+**gsId** Corresponds to **GameServer's ID**
 
-**Admin**
-- `addAdmin(sId)` - encounters **400 BAD REQUEST** using **POST METHOD** with the following layout:
-  - *POST* https://mtxserv.com/api/v1/admins/SERVER_ID?access_token=ACCESS_TOKEN
-  - *param (required): user*: john@doe.com
-  - *param (optional): roles[]*: []
-- `removeAdmin(sId)` - encounters **404 NOT FOUND** using **DELETE METHOD** with the following layout:
-  - *DELETE* https://mtxserv.com/api/v1/admins/SERVER_ID/USER_ID?access_token=ACCESS_TOKEN
+**iId** Corresponds to **Invoice's ID**
+
+**uId** Corresponds to **User's ID**
+
+(**NB, Weird**: `Admin.getAdminList(iId)` returns an Array of users. **uId** corresponds to **user.id** and not **user.user_id** provided by the API !)
+
+### Remarks
 
 **Invoice**
-- `changeInvoiceSlots(sId, slots)` - **Not enough documented**, couldn't test it according to actual offers
-- *POST* `/invoices/${sId}/offers/game` - **Documentation is wrong**, don't know what it is for
+- `changeInvoiceSlots(iId, slots)` - **Not enough documented**, couldn't test it according to actual offers
+- *POST* `/invoices/${iId}/offers/game` - **Documentation is wrong**, don't know what it is for
 
 **Viewer**
-- `getTeamspeakServerData(sId)` - Couldn't test it because **I don't have a Teamspeak server**
+- `getTeamspeakServerData(iId)` - Couldn't test it because **I don't have a Teamspeak server**
 
 **Game**
-- `sendCommand(sId, cmd)` - encounters **404 NOT FOUND** using **POST METHOD** with the following layout:
-  - *POST* https://mtxserv.com/api/v1/game/SERVER_ID/command?access_token=ACCESS_TOKEN
-  - *param (required): command*: /help
-- *PUT* `/game/${sId}/games` - Couldn't test it because `getGameList(sId)` **doesn't work**.
-- `getGameList(sId)` - encounters **404 NOT FOUND** using **GET METHOD** with the following layout:
-  - *GET* https://mtxserv.com/api/v1/game/SERVER_ID/games?access_token=ACCESS_TOKEN
-- *PUT* `/game/${sId}/slots` - Couldn't test it because I don't know what are the **slots possibilities**.
-- `getGameServersList(id)` - encounters **403 FORBIDDEN** using **GET METHOD** with the following layout:
-  - *GET* https://mtxserv.com/api/v1/game/CLIENT_ID/servers?access_token=ACCESS_TOKEN
-- `getGameServerById(id, sId)` - encounters **403 FORBIDDEN** using **GET METHOD** with the following layout:
-  - *GET* https://mtxserv.com/api/v1/game/CLIENT_ID/servers/SERVER_ID?access_token=ACCESS_TOKEN 
+- *PUT* `/game/${gsId}/games` - Couldn't test it because **I don't have a server to test on**.
+- *PUT* `/game/${gsId}/slots` - Couldn't test it because **I don't know what are the slots possibilities**.
 
 ## Contribution
 

@@ -16,10 +16,16 @@ let Client = mTxServClient.initialize({
   apiToken: process.env.API_KEY
 })
 
-test('Calling /viewers/game with params in GET returns object', () => {
+/**
+ * Viewer.getGameServerData()
+ */
+test('Calling /viewers/game in GET with params returns object', () => {
   expect(typeof Client.Viewer.getGameServerData(process.env.SERVER_TYPE, process.env.SERVER_IP, process.env.SERVER_PORT)).toBe('object')
 })
 
-test('Calling /viewers/mumble with params in GET returns object', () => {
+/**
+ * Viewer.getMumbleServerData()
+ */
+test('Calling /viewers/mumble in GET with params returns object', () => {
   expect(typeof Client.Viewer.getMumbleServerData(process.env.MUMBLE_IP, process.env.MUMBLE_PORT)).toBe('object')
 })

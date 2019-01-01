@@ -12,10 +12,11 @@ module.exports = class Password {
    * @param {string} baseUrl API base URL
    * @param {object} request sync-request Object
    */
-  constructor(accessToken, baseUrl, request) {
+  constructor(accessToken, baseUrl, request, exec) {
     this.accessToken = accessToken
     this.baseUrl = baseUrl
     this.req = request
+    this.exec = exec
   }
 
   /**
@@ -31,25 +32,6 @@ module.exports = class Password {
       paramAtEnd: true,
       params: {}
     })
-  }
-
-  /**
-   * Execute the request with the provided parameters
-   * @param {object} params Parameters to use for the API request
-   * @returns {object} Parsed JSON from response
-   */
-  exec(params) {
-    let uri =  params.paramAtEnd ? params.uri.substr(1) + '&' : params.uri.substr(1) + '?'
-    let method = params.method
-    if (method == 'POST' || method == 'PUT') {
-      return JSON.parse(this.req(method, `${this.baseUrl}${uri}`, {
-        json: params.params
-      }).getBody('utf8'))
-    } else {
-      return JSON.parse(this.req(method,
-        `${this.baseUrl}${uri}access_token=${this.accessToken}`
-      ).getBody('utf8'))
-    }
   }
 
 }

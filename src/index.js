@@ -16,12 +16,16 @@ module.exports = class mTxServClient {
     this.accessToken = parsed.access_token
     this.expiresIn = parsed.expires_in
     this.refreshToken = parsed.refresh_token
-    this.Invoice = new ( require('./Invoice') )(this.accessToken, defaultConfig.baseUrl, request)
-    this.Password = new ( require('./Password') )(this.accessToken, defaultConfig.baseUrl, request)
-    this.Viewer = new ( require('./Viewer') )(this.accessToken, defaultConfig.baseUrl, request)
-    this.Admin = new ( require('./Admin') )(this.accessToken, defaultConfig.baseUrl, request)
+    this.Invoice = new ( require('./Invoice') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
+    this.Password = new ( require('./Password') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
+    this.Viewer = new ( require('./Viewer') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
+    this.Admin = new ( require('./Admin') )(this.accessToken, defaultConfig.baseUrl, request, this.exec)
   }
 
+  /**
+   * Initializes the client with user config
+   * @param {object} userConfig User configuration (ID, SECRET, API TOKEN)
+   */
   static initialize(userConfig) {
       // Testing user input
       if (typeof userConfig !== 'object' || Array.isArray(userConfig)) {
@@ -48,6 +52,25 @@ module.exports = class mTxServClient {
       // Requesting access token
       let res = request('GET', generatedUrl).getBody()
       return new this(JSON.parse(res))
+  }
+
+  /**
+   * Execute the request with the provided parameters
+   * @param {object} params Parameters to use for the API request
+   * @returns {object} Parsed JSON from response
+   */
+  exec(params) {
+    let uri =  params.paramAtEnd ? params.uri.substr(1) + '&' : params.uri.substr(1) + '?'
+    let method = params.method
+    if (method == 'POST' || method == 'PUT') {
+      return JSON.parse(this.req(method, `${this.baseUrl}${uri}`, {
+        json: params.params
+      }).getBody('utf8'))
+    } else {
+      return JSON.parse(this.req(method,
+        `${this.baseUrl}${uri}access_token=${this.accessToken}`
+      ).getBody('utf8'))
+    }
   }
 
 }

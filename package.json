@@ -1,10 +1,10 @@
 {
   "name": "mtxserv-node",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Node.JS SDK providing easy access to mTxServ's API",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --maxWorkers=2"
+    "test": "jest --maxWorkers=1"
   },
   "repository": {
     "type": "git",

@@ -8,5 +8,5 @@ module.exports = {
   baseUrl: 'https://mtxserv.com/api/v1/',
   version: 'v1',
   grantType: 'https://mtxserv.com/grants/api_key',
-  OAuthUrl: 'https://www.mtxserv.fr/oauth/v2/token'
+  OAuthUrl: 'https://mtxserv.com/oauth/v2/token'
 }

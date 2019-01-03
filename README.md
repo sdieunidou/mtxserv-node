@@ -70,7 +70,7 @@ something = client.Class.{subClass.}Method(params)
 - [ ] **Game**
   - [ ] ARK
   - [ ] ARKWorkshop
-  - [ ] Actions
+  - [x] Actions
   - [ ] Arma3
   - [ ] Backup
   - [ ] Bukkit
@@ -103,11 +103,11 @@ something = client.Class.{subClass.}Method(params)
   - [ ] Domain
 - [ ] **Invoice**
 - [x] **Password**
-- [ ] **Viewer**
-- [ ] **Voice**
-  - [ ] Actions
-  - [ ] Mumble
-  - [ ] Teamspeak
+- [x] **Viewer**
+- [x] **Voice**
+  - [x] Actions
+  - [x] Mumble
+  - [x] Teamspeak
 
 ## Testing
 
@@ -133,18 +133,56 @@ $ npm test
 
 (**NB, Weird**: `Admin.getAdminList(iId)` returns an Array of users. **uId** corresponds to **user.id** and not **user.user_id** provided by the API !)
 
+### Grants List
+#### Global (Game / Voice / Hosting)
+- **GRANTING_ACTIONS** - Actions (Start, Stop, Restart) Ability
+- **GRANTING_FTP** - Files (WebFTP + FTP) Access
+- **GRANTING_MYSQL** - MySQL Access
+- **GRANTING_DOMAIN** - Domain Access
+- **GRANTING_COLLABORATORS** - Collaborators Management
+- **GRANTING_BACKUP** - Backups Management
+- **GRANTING_TASKS** - Periodic Tasks Management
+- **GRANTING_REINSTALL** - Reinstall Ability
+- **GRANTING_RESTORE_EXPIRED** - Restore Expired Server Ability
+- **GRANTING_CONFIGURATION** - Configuration Access
+- **GRANTING_INVOICE** - Invoice Access
+- **GRANTING_PRIVILEGE_KEYS** - Privileges Management
+- **GRANTING_MUMBLE_CONSOLE** - Mumble Console Access
+
+#### Game
+- **GAME_GRANTING_ACTIONS**: Actions (Start, Stop, Restart, Force restart, Update) Ability
+- **GAME_GRANTING_CONFIGURATION**: Configuration Access
+- **GAME_GRANTING_TASKS**: Periodic Tasks Management
+- **GAME_GRANTING_BACKUP**: Backups Management
+- **GAME_GRANTING_REINSTALL**: Reinstall Ability
+- **GAME_GRANTING_COLLABORATORS**: Collaborators Management
+
+#### Hosting
+- **HOSTING_GRANTING_DOMAIN**: Domain Access
+- **HOSTING_GRANTING_FTP**: Files (WebFTP + FTP) Access
+- **HOSTING_GRANTING_MYSQL**: MySQL Access
+- **HOSTING_GRANTING_COLLABORATORS**: Collaborators Management
+
+#### Voice (Mumble / TeamSpeak)
+- **TEAMSPEAK_GRANTING_ACTIONS**: Actions (Start, Stop, Restart, Exec CVAR) Ability
+- **TEAMSPEAK_GRANTING_CONFIGURATION**: Configuration Access
+- **TEAMSPEAK_GRANTING_PRIVILEGE_KEYS**: Privileges Keys Management
+- **TEAMSPEAK_GRANTING_REINSTALL**: Reinstall Ability
+- **TEAMSPEAK_GRANTING_COLLABORATORS**: Collaborators Management
+- **MUMBLE_GRANTING_ACTIONS**: Actions (Start, Stop, Restart) Ability
+- **MUMBLE_GRANTING_CONFIGURATION**: Configuration Access
+- **MUMBLE_GRANTING_MUMBLE_CONSOLE**: Console Access
+- **MUMBLE_GRANTING_REINSTALL**: Reinstall Ability
+- **MUMBLE_GRANTING_COLLABORATORS**: Collaborators Management
+
 ### Remarks
 
 **Invoice**
-- `changeInvoiceSlots(iId, slots)` - **Not enough documented**, couldn't test it according to actual offers
 - *POST* `/invoices/${iId}/offers/game` - **Documentation is wrong**, don't know what it is for
 
-**Viewer**
-- `getTeamspeakServerData(iId)` - Couldn't test it because **I don't have a Teamspeak server**
-
 **Game**
-- *PUT* `/game/${gsId}/games` - Couldn't test it because **I don't have a server to test on**.
-- *PUT* `/game/${gsId}/slots` - Couldn't test it because **I don't know what are the slots possibilities**.
+- *PUT* `/game/${gsId}/games` - Couldn't test it because **I don't have a server to test on**
+- *PUT* `/game/${gsId}/slots` - Couldn't test it because **I don't know what are the slots possibilities**
 
 ## Contribution
 

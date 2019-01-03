@@ -8,52 +8,54 @@
 
 require('dotenv').config()
 
-const mTxServClient = require('../src')
-
-let Client = mTxServClient.initialize({
+const mTxClient = require('../src/index').initialize({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   apiToken: process.env.API_KEY
 })
 
-/**
- * Admin.getAdminList()
- */
-test('Calling /admins/{id} in GET returns array', () => {
-  expect(Array.isArray(Client.Admin.getAdminList(process.env.SERVER_INVOICE_ID))).toBe(true)
+test('Call getAdminList() returns object & status 200', () => {
+  let req = mTxClient.Admin.getAdminList(process.env.S_INVOICE_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })
 
-/**
- * Admin.addAdmin()
- */
-test('Calling /admins/${iId} in POST with params returns object', () => {
-  expect(typeof Client.Admin.addAdmin(process.env.SERVER_INVOICE_ID, process.env.NEWADMIN_EMAIL)).toBe('string')
+test('Call addAdmin() without grants returns null & status 201', () => {
+  let req = mTxClient.Admin.addAdmin(process.env.S_INVOICE_ID, process.env.NEWADMIN_EMAIL)
+  expect(req.body).toBe(null)
+  expect(req.statusCode).toBe(201)
 })
 
-/**
- * Admin.getAdmin()
- */
-test('Calling /admins/${iId}/${uId} in GET returns object', () => {
-  Client.Admin.getAdminList(process.env.SERVER_INVOICE_ID).forEach(admin => {
-    expect(typeof Client.Admin.getAdmin(process.env.SERVER_INVOICE_ID, admin.id)).toBe('object')
-  })
+test('Call removeAdmin() returns null & status 200', () => {
+  let req = mTxClient.Admin.getAdminList(process.env.S_INVOICE_ID, process.env.NEWADMIN_EMAIL, ["GRANTING_ACTIONS"])
+  req.body.forEach(admin => {
+    let delReq = mTxClient.Admin.removeAdmin(process.env.S_INVOICE_ID, admin.id)
+    expect(delReq.body).toBe(null)
+    expect(delReq.statusCode).toBe(200)
+  });
 })
 
-/**
- * Admin.editAdmin()
- */
-test('Calling /admins/${iId}/${uId} in PUT returns object', () => {
-  Client.Admin.getAdminList(process.env.SERVER_INVOICE_ID).forEach(admin => {
-    expect(typeof Client.Admin.editAdmin(process.env.SERVER_INVOICE_ID, admin.id, ["GRANTING_ACTIONS"])).toBe('object')
-  })
+test('Call addAdmin() with grants returns null & status 201', () => {
+  let req = mTxClient.Admin.addAdmin(process.env.S_INVOICE_ID, process.env.NEWADMIN_EMAIL, ["GRANTING_ACTIONS"])
+  expect(req.body).toBe(null)
+  expect(req.statusCode).toBe(201)
 })
 
-/**
- * Admin.removeAdmin()
- */
-test('Calling /admins/${iId}/${uId} in DELETE returns array', () => {
-  Client.Admin.getAdminList(process.env.SERVER_INVOICE_ID).forEach(admin => {
-    expect(typeof Client.Admin.removeAdmin(process.env.SERVER_INVOICE_ID, admin.id)).toBe('string')
-  })
+test('Call getAdmin() returns object & status 201', () => {
+  let req = mTxClient.Admin.getAdminList(process.env.S_INVOICE_ID, process.env.NEWADMIN_EMAIL, ["GRANTING_ACTIONS"])
+  req.body.forEach(admin => {
+    let editReq = mTxClient.Admin.getAdmin(process.env.S_INVOICE_ID, admin.id)
+    expect(typeof editReq.body).toBe('object')
+    expect(editReq.statusCode).toBe(200)
+  });
+})
+
+test('Call editAdmin() returns object & status 201', () => {
+  let req = mTxClient.Admin.getAdminList(process.env.S_INVOICE_ID, process.env.NEWADMIN_EMAIL, ["GRANTING_ACTIONS"])
+  req.body.forEach(admin => {
+    let editReq = mTxClient.Admin.editAdmin(process.env.S_INVOICE_ID, admin.id, ["GRANTING_ACTIONS"])
+    expect(typeof editReq.body).toBe('object')
+    expect(editReq.statusCode).toBe(201)
+  });
 })
 

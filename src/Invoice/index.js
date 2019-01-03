@@ -8,15 +8,10 @@ module.exports = class Invoice {
 
   /**
    * Builds the Invoice API module
-   * @param {string} accessToken Generated access token
-   * @param {string} baseUrl API base URL
-   * @param {object} request sync-request Object
+   * @param {object} mTxRequest
    */
-  constructor(accessToken, baseUrl, request, exec) {
-    this.accessToken = accessToken
-    this.baseUrl = baseUrl
-    this.req = request
-    this.exec = exec
+  constructor(mTxRequest) {
+    this.mTxRequest = mTxRequest
   }
 
   /**
@@ -25,11 +20,10 @@ module.exports = class Invoice {
    * @returns {object} List of invoices in details
    */
   getInvoicesList()  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/invoices`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
   
@@ -40,11 +34,10 @@ module.exports = class Invoice {
    * @returns {object} Invoice's details
    */
   getInvoice(iId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/invoices/${iId}`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
   
@@ -55,11 +48,10 @@ module.exports = class Invoice {
    * @returns {object} Invoice's logs
    */
   getInvoiceLogs(iId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/invoices/${iId}/logs`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
   
@@ -71,13 +63,13 @@ module.exports = class Invoice {
    * @see README#Notes
    */
   changeInvoiceSlots(iId, slots) {
-    return this.exec({
-      method: 'PUT',
+    return this.mTxRequest.request({
+      method: 'POST',
       uri: `/invoices/${iId}/offers`,
-      paramAtEnd: false,
-      params: {
+      json: {
         slots: slots
-      }
+      },
+      statusCodes: [201]
     })
   }
   
@@ -88,11 +80,10 @@ module.exports = class Invoice {
    * @returns Invoice's offers list
    */
   getInvoiceOffersList(iId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/invoices/${iId}/offers/game`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
   
@@ -103,11 +94,10 @@ module.exports = class Invoice {
    * @return {object} State and date for changing offer
    */
   getInvoiceNextOfferDate(iId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/invoices/${iId}/offers/next-allowed`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
 

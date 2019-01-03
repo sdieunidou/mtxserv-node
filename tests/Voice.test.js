@@ -14,14 +14,14 @@ const mTxClient = require('../src/index').initialize({
   apiToken: process.env.API_KEY
 })
 
-test('Call generateRandomPassword() without params returns string & status 200', () => {
-  let req = mTxClient.Password.generateRandomPassword()
+test('Call getName() returns string & status 200', () => {
+  let req = mTxClient.Voice.getName(process.env.T_INVOICE_ID)
   expect(typeof req.body).toBe('string')
   expect(req.statusCode).toBe(200)
 })
 
-test('Call generateRandomPassword() with params returns string & status 200', () => {
-  let req = mTxClient.Password.generateRandomPassword(10)
-  expect(typeof req.body).toBe('string')
-  expect(req.statusCode).toBe(200)
+test('Call changeName() returns null & status 200', () => {
+  let req = mTxClient.Voice.changeName(process.env.M_INVOICE_ID, 'VoiceServer')
+  expect(req.body).toBe(null)
+  expect(req.statusCode).toBe(201)
 })

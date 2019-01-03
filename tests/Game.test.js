@@ -8,38 +8,32 @@
 
 require('dotenv').config()
 
-const mTxServClient = require('../src')
-
-let Client = mTxServClient.initialize({
+const mTxClient = require('../src/index').initialize({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   apiToken: process.env.API_KEY
 })
 
-/**
- * Game.sendCommand()
- */
-test('Calling /game/${gsId}/command in POST with params returns string', () => {
-  expect(typeof Client.Game.sendCommand(process.env.SERVER_ID, 'help')).toBe('string')
+test('Call sendCommand() returns null & status 201', () => {
+  let req = mTxClient.Game.sendCommand(process.env.SERVER_ID, 'help')
+  expect(req.body).toBe(null)
+  expect(req.statusCode).toBe(201)
 })
 
-/**
- * Game.getGameList()
- */
-test('Calling /game/${gsId}/games in GET returns array', () => {
-  expect(Array.isArray(Client.Game.getGameList(process.env.SERVER_ID))).toBe(true)
+test('Call getGameList() returns object & status 200', () => {
+  let req = mTxClient.Game.getGameList(process.env.SERVER_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })
 
-/**
- * Game.getGameServersList()
- */
-test('Calling /game/${id}/servers in GET returns array', () => {
-  expect(Array.isArray(Client.Game.getGameServersList(process.env.SERVER_INVOICE_ID))).toBe(true)
+test('Call getGameServersList() returns object & status 200', () => {
+  let req = mTxClient.Game.getGameServersList(process.env.S_INVOICE_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })
 
-/**
- * Game.getGameServerById()
- */
-test('Calling /game/${iId}/servers/${gsId} in GET returns object', () => {
-  expect(typeof Client.Game.getGameServerById(process.env.SERVER_INVOICE_ID, process.env.SERVER_ID)).toBe('object')
+test('Call getGameServerById() returns object & status 200', () => {
+  let req = mTxClient.Game.getGameServerById(process.env.S_INVOICE_ID, process.env.SERVER_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })

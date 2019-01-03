@@ -8,15 +8,10 @@ module.exports = class Viewer {
 
   /**
    * Builds the Viewer API module
-   * @param {string} accessToken Generated access token
-   * @param {string} baseUrl API base URL
-   * @param {object} request sync-request Object
+   * @param {object} mTxRequest
    */
-  constructor(accessToken, baseUrl, request, exec) {
-    this.accessToken = accessToken
-    this.baseUrl = baseUrl
-    this.req = request
-    this.exec = exec
+  constructor(mTxRequest) {
+    this.mTxRequest = mTxRequest
   }
   
   /**
@@ -28,43 +23,40 @@ module.exports = class Viewer {
    * @returns {object} Server's data
    */
   getGameServerData(type, ip, port)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/viewers/game?type=${type}&ip=${ip}&port=${port}`,
-      paramAtEnd: true,
-      params: {}
+      statusCodes: [200]
     })
   }
 
   /**
    * Returns data about specified Mumble server
-   * @param {string} ip Server's IP
-   * @param {number} port Server's PORT
+   * @param {string} ip Mumble's IP
+   * @param {number} port Mumble's PORT
    * @method GET
-   * @returns {object} Server's data
+   * @returns {object} Mumble's data
    */
   getMumbleServerData(ip, port)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/viewers/mumble?ip=${ip}&port=${port}`,
-      paramAtEnd: true,
-      params: {}
+      statusCodes: [200]
     })
   }
 
   /**
    * Returns data about specified Teamspeak server
-   * @param {string} ip Server's IP
-   * @param {number} port Server's PORT
+   * @param {string} ip TeamSpeak's IP
+   * @param {number} port TeamSpeak's PORT
    * @method GET
-   * @see README#Notes
+   * @returns {object} TeamSpeak's data
    */
   getTeamspeakServerData(ip, port)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/viewers/teamspeak?ip=${ip}&port=${port}`,
-      paramAtEnd: true,
-      params: {}
+      statusCodes: [200]
     })
   }
 

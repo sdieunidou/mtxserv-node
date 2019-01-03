@@ -8,15 +8,11 @@ module.exports = class Game {
 
   /**
    * Builds the Game API module
-   * @param {string} accessToken Generated access token
-   * @param {string} baseUrl API base URL
-   * @param {object} request sync-request Object
+   * @param {object} mTxRequest
    */
-  constructor(accessToken, baseUrl, request, exec) {
-    this.accessToken = accessToken
-    this.baseUrl = baseUrl
-    this.req = request
-    this.exec = exec
+  constructor(mTxRequest) {
+    this.mTxRequest = mTxRequest
+    this.Actions = new ( require('./Actions') )( this.mTxRequest )
   }
 
   /**
@@ -24,14 +20,13 @@ module.exports = class Game {
    * @param {number} gsId GameServer's ID
    * @param {string} cmd Command to send
    * @method POST
-   * @returns {string} Empty string
    */
   sendCommand(gsId, cmd)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'POST',
       uri: `/game/${gsId}/command`,
-      paramAtEnd: false,
-      params: {command: `${cmd}`}
+      json: {command: cmd},
+      statusCodes: [201, 400]
     })
   }
 
@@ -42,11 +37,10 @@ module.exports = class Game {
    * @returns {array} List of available games
    */
   getGameList(gsId)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/game/${gsId}/games`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [201]
     })
   }
 
@@ -57,11 +51,10 @@ module.exports = class Game {
    * @returns {array} List of this invoice servers
    */
   getGameServersList(iId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/game/${iId}/servers`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
 
@@ -70,14 +63,13 @@ module.exports = class Game {
    * @param {number} iId Invoice's ID
    * @param {string} gsId GameServer's ID
    * @method GET
-   * @returns {object} Data about the 
+   * @returns {object} Data about the GameServer
    */
   getGameServerById(iId, gsId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/game/${iId}/servers/${gsId}`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
 

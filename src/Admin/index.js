@@ -8,15 +8,10 @@ module.exports = class Admin {
 
   /**
    * Builds the Admin API module
-   * @param {string} accessToken Generated access token
-   * @param {string} baseUrl API base URL
-   * @param {object} request sync-request Object
+   * @param {object} mTxRequest
    */
-  constructor(accessToken, baseUrl, request, exec) {
-    this.accessToken = accessToken
-    this.baseUrl = baseUrl
-    this.req = request
-    this.exec = exec
+  constructor(mTxRequest) {
+    this.mTxRequest = mTxRequest
   }
 
   /**
@@ -26,11 +21,10 @@ module.exports = class Admin {
    * @returns {object} Invoice's administrators list
    */
   getAdminList(iId)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/admins/${iId}`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
 
@@ -40,14 +34,14 @@ module.exports = class Admin {
    * @param {string} email New administrator's email
    * @param {array} grants Array of his grants (Ex: ["GRANTING_GAME_FILES", "GRANTING_ACTIONS"])
    * @method POST
-   * @returns {string} Empty string
+   * @returns {null}
    */
   addAdmin(iId, email, grants = []) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'POST',
       uri: `/admins/${iId}`,
-      paramAtEnd: false,
-      params: {
+      statusCodes: [201, 400],
+      json: {
         user: email,
         roles: grants
       }
@@ -59,14 +53,13 @@ module.exports = class Admin {
    * @param {number} iId Invoice's ID
    * @param {number} uId Admin's ID
    * @method DELETE
-   * @returns {string} Empty string
+   * @returns {null}
    */
   removeAdmin(iId, uId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'DELETE',
       uri: `/admins/${iId}/${uId}`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
 
@@ -78,11 +71,10 @@ module.exports = class Admin {
    * @returns {object} Admin's details
    */
   getAdmin(iId, uId) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/admins/${iId}/${uId}`,
-      paramAtEnd: false,
-      params: {}
+      statusCodes: [200]
     })
   }
 
@@ -95,11 +87,11 @@ module.exports = class Admin {
    * @returns {object} Admin's details
    */
   editAdmin(iId, uId, grants = []) {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'PUT',
       uri: `/admins/${iId}/${uId}`,
-      paramAtEnd: false,
-      params: {
+      statusCodes: [201, 400],
+      json: {
         roles: grants
       }
     })

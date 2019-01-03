@@ -8,45 +8,43 @@
 
 require('dotenv').config()
 
-const mTxServClient = require('../src/')
-
-let Client = mTxServClient.initialize({
+const mTxClient = require('../src/index').initialize({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   apiToken: process.env.API_KEY
 })
 
-/**
- * Invoice.getInvoicesList()
- */
-test('Calling /invoices in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoicesList()).toBe('object')
+test('Call getInvoicesList() returns object & status 200', () => {
+  let req = mTxClient.Invoice.getInvoicesList()
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })
 
-/**
- * Invoice.getInvoice()
- */
-test('Calling /invoices/{id} in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoice(process.env.SERVER_INVOICE_ID)).toBe('object')
+test('Call getInvoice(iId) returns object & status 200', () => {
+  let req = mTxClient.Invoice.getInvoice(process.env.S_INVOICE_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })
 
-/**
- * Invoice.getInvoiceLogs()
- */
-test('Calling /invoices/{id}/logs in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoiceLogs(process.env.SERVER_INVOICE_ID)).toBe('object')
+test('Call getInvoiceLogs(iId) returns object & status 200', () => {
+  let req = mTxClient.Invoice.getInvoice(process.env.S_INVOICE_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })
 
-/**
- * Invoice.getInvoiceOffersList()
- */
-test('Calling /invoices/{id}/offers/game in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoiceOffersList(process.env.SERVER_INVOICE_ID)).toBe('object')
+test('Call changeInvoiceSlots(slots) returns status 201/400', () => {
+  let req = mTxClient.Invoice.changeInvoiceSlots(process.env.T_INVOICE_ID, 80)
+  expect(req.statusCode).toBe(400)
 })
 
-/**
- * Invoice.getInvoiceNextOfferDate()
- */
-test('Calling /invoices/{id}/offers/next-allowed in GET returns JSON', () => {
-  expect(typeof Client.Invoice.getInvoiceNextOfferDate(process.env.SERVER_INVOICE_ID)).toBe('object')
+test('Call getInvoiceOffersList(iId) returns object & status 200', () => {
+  let req = mTxClient.Invoice.getInvoiceOffersList(process.env.S_INVOICE_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
+})
+
+test('Call getInvoiceNextOfferDate(iId) returns object & status 200', () => {
+  let req = mTxClient.Invoice.getInvoiceNextOfferDate(process.env.S_INVOICE_ID)
+  expect(typeof req.body).toBe('object')
+  expect(req.statusCode).toBe(200)
 })

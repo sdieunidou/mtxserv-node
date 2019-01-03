@@ -8,15 +8,10 @@ module.exports = class Password {
 
   /**
    * Builds the Password API module
-   * @param {string} accessToken Generated access token
-   * @param {string} baseUrl API base URL
-   * @param {object} request sync-request Object
+   * @param {object} mTxRequest
    */
-  constructor(accessToken, baseUrl, request, exec) {
-    this.accessToken = accessToken
-    this.baseUrl = baseUrl
-    this.req = request
-    this.exec = exec
+  constructor(mTxRequest) {
+    this.mTxRequest = mTxRequest
   }
 
   /**
@@ -26,11 +21,10 @@ module.exports = class Password {
    * @returns {string} Generated password
    */
   generateRandomPassword(length = 8)  {
-    return this.exec({
+    return this.mTxRequest.request({
       method: 'GET',
       uri: `/password/random?length=${length}`,
-      paramAtEnd: true,
-      params: {}
+      statusCodes: [200]
     })
   }
 

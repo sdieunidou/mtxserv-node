@@ -26,6 +26,7 @@ module.exports = class mTxServClient {
     this.Viewer = new ( require('./Viewer') )( this.mTxRequest )
     this.Admin = new ( require('./Admin') )( this.mTxRequest )
     this.Game = new ( require('./Game') )( this.mTxRequest )
+    this.Hosting = new ( require('./Hosting') )( this.mTxRequest )
   }
 
   /**

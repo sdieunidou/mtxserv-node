@@ -99,8 +99,8 @@ something = client.Class.{subClass.}Method(params)
   - [ ] STEAMStats
   - [ ] Tasks
   - [ ] eBOT
-- [ ] **Hosting**
-  - [ ] Domain
+- [x] **Hosting**
+  - [x] Domain
 - [ ] **Invoice**
 - [x] **Password**
 - [x] **Viewer**

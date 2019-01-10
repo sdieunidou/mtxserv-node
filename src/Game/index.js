@@ -13,6 +13,8 @@ module.exports = class Game {
   constructor(mTxRequest) {
     this.mTxRequest = mTxRequest
     this.Actions = new ( require('./Actions') )( this.mTxRequest )
+    this.Backup = new ( require('./Backup') )( this.mTxRequest )
+    this.FTP = new ( require('./FTP') )( this.mTxRequest )
   }
 
   /**

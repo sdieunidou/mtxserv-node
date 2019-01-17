@@ -14,13 +14,13 @@ const mTxClient = require('../src/index').initialize({
   apiToken: process.env.API_KEY
 })
 
-test('Call resources() returns null & status 200', () => {
+test('Call resources() returns object & status 200', () => {
   let req = mTxClient.Game.Infos.resources(process.env.SERVER_ID)
   expect(typeof req.body).toBe('object')
   expect(req.statusCode).toBe(200)
 })
 
-test('Call state() returns null & status 200', () => {
+test('Call state() returns object & status 200', () => {
   let req = mTxClient.Game.Infos.state(process.env.SERVER_ID)
   expect(typeof req.body).toBe('object')
   expect(req.statusCode).toBe(200)

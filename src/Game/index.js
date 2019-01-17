@@ -13,7 +13,6 @@ module.exports = class Game {
   constructor(mTxRequest) {
     this.mTxRequest = mTxRequest
     this.Actions = new ( require('./Actions') )( this.mTxRequest )
-    this.Infos = new ( require('./Infos') )( this.mTxRequest )
   }
 
   /**

@@ -81,7 +81,7 @@ something = client.Class.{subClass.}Method(params)
   - [ ] GmodBackdoor
   - [ ] HTLV
   - [ ] History
-  - [ ] Infos
+  - [x] Infos
   - [ ] Maps
   - [ ] MineBackup
   - [ ] MineBan
